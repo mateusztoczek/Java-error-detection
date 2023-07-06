@@ -5,17 +5,14 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonSyntaxException;
 import pl.wieik.ti.ti2023lab5.model.HammingCodeApi;
-import pl.wieik.ti.ti2023lab5.model.HammingCodeText;
 import pl.wieik.ti.ti2023lab5.model.HammingResponse;
 
 @WebServlet(name="hamming", value = "/hamming")
@@ -25,11 +22,11 @@ public class hamming extends HttpServlet {
         super.init();
     }
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse res) throws IOException {
         res.sendRedirect("hamming.jsp");
     }
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         // Odczytanie danych z żądania
         HttpSession session = request.getSession();
         String requestBody = request.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
@@ -56,19 +53,20 @@ public class hamming extends HttpServlet {
 
         session.setAttribute("notatka", request.getHeader("notatka"));
 
-        HammingResponse responseData[] = new HammingResponse[data.size()];
-        int tableInput[];
+        HammingResponse hammingResp = new HammingResponse();
+        HammingResponse[] hammingRespTable = new HammingResponse[data.size()];
+        int[] tableInput;
         for (int i = 0; i < data.size(); i++) {
             tableInput = new int[data.get(i).size()];
             for (int x = 0; x < tableInput.length; x++) {
                 tableInput[x] = data.get(i).get(x);
             }
-            responseData[i] = HammingCodeApi.receiveData(tableInput, 4);
+            hammingRespTable[i]=HammingCodeApi.receiveData(tableInput, 4);
         }
 
-        HammingCodeText x = new HammingCodeText();
-        x.setTable(responseData);
-        session.setAttribute("tablicaReponse", (HammingCodeText) x);
+
+        hammingResp.setTables(hammingRespTable);
+        session.setAttribute("tablicaReponse", hammingResp);
 
         // Odczytanie raportu z nagłówka "Report"
         String report = request.getHeader("Report");

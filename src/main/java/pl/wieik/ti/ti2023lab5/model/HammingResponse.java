@@ -1,17 +1,17 @@
 package pl.wieik.ti.ti2023lab5.model;
 
 public class HammingResponse {
+
     String message;
     int error_loc;
     int[] response;
+    HammingResponse[] tables;
 
     public String getMessage() {
         return message;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
-    }
+    public void setMessage(String message) {this.message = message;}
 
     public int getError_loc() {
         return error_loc;
@@ -27,5 +27,13 @@ public class HammingResponse {
 
     public void setResponse(int[] response) {
         this.response = response;
+    }
+
+    public HammingResponse[] getTables() {
+        return tables;
+    }
+
+    public void setTables(HammingResponse[] tables) {
+        this.tables = tables;
     }
 }

@@ -1,20 +1,13 @@
 package pl.wieik.ti.ti2023lab5.model;
 
-public class CrcResp {
+public class CrcResponse {
 
     String expected;
-
-    public String getCrc() {
-        return crc;
-    }
-
-    public void setCrc(String crc) {
-        this.crc = crc;
-    }
-
     String crc;
     String div;
-    int[] data;
+
+    String newData;
+
 
     public String getNewData() {
         return newData;
@@ -24,11 +17,6 @@ public class CrcResp {
         this.newData = newData;
     }
 
-    String newData;
-
-
-
-
     public String getExpected() {
         return expected;
     }
@@ -36,8 +24,6 @@ public class CrcResp {
     public void setExpected(String expected) {
         this.expected = expected;
     }
-
-
 
     public String getDiv() {
         return div;
@@ -47,14 +33,8 @@ public class CrcResp {
         this.div = div;
     }
 
-    public int[] getData() {
-        return data;
-    }
+    public String getCrc() {return crc;}
 
-    public void setData(int[] data) {
-        this.data = data;
-    }
-
-
+    public void setCrc(String crc) {this.crc = crc;}
 
 }

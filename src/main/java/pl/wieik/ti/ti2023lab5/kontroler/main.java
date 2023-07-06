@@ -5,7 +5,6 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
-import java.util.HashMap;
 
 @WebServlet(name="main", value = "/main")
 public class main extends HttpServlet {
@@ -15,10 +14,10 @@ public class main extends HttpServlet {
         super.init();
     }
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse res) throws IOException {
             res.sendRedirect("index.jsp");
     }
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse res) {
     }
 }

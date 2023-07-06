@@ -1,9 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="pl.wieik.ti.ti2023lab5.model.HammingCodeApi" %>
-<%@ page import="java.util.Arrays" %>
-<%@ page import="java.util.function.BinaryOperator" %>
 <%@ page import="pl.wieik.ti.ti2023lab5.model.HammingResponse" %>
-<jsp:useBean id="tablicaReponse" class="pl.wieik.ti.ti2023lab5.model.HammingCodeText" scope="session" />
+<jsp:useBean id="tablicaReponse" class="pl.wieik.ti.ti2023lab5.model.HammingResponse" scope="session" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,8 +11,8 @@
 </head>
 <body>
 <h1>Kodowanie Hamminga</h1>
-<h2>Odebrane kody Hamminga:</h2>
-<% HammingResponse tablica[] = tablicaReponse.getTable(); %>
+<h2>Odebrany kod Hamminga:</h2>
+<% HammingResponse tablica[] = tablicaReponse.getTables(); %>
 <%for (int x = 0 ; x < tablica.length; x++) { %>
 <% if(tablica[x].getMessage().equals("Nie znaleziono błędu.")) {
     continue;

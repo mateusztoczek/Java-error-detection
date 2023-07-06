@@ -38,17 +38,12 @@
   String inputDiv = request.getParameter("inputDiv");
   int divisorSize = inputDiv.length();
 
-
   int[] dataWord = CrcCodeApi.convertStrToIntArr(inputWord);
   int[] dataDiv = CrcCodeApi.convertStrToIntArr(inputDiv);
   int[] rem = CrcCodeApi.getCRC(dataWord,dataDiv);
 
-  int[] solution = CrcCodeApi.divideDataWithDivisor(dataWord,dataDiv);
-
   String remainder= CrcCodeApi.convertIntArrayToStr(rem);
   String generatedCRC= inputWord+remainder;
-  int[] generated = CrcCodeApi.convertStrToIntArr(generatedCRC);
-
 
 %>
 

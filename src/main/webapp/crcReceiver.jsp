@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="pl.wieik.ti.ti2023lab5.model.*" %>
-<jsp:useBean id="newCrcReponse" class="pl.wieik.ti.ti2023lab5.model.CrcResp" scope="session" />
+<jsp:useBean id="newCrcReponse" class="pl.wieik.ti.ti2023lab5.model.CrcResponse" scope="session" />
 
 <!DOCTYPE html>
 <html>
@@ -12,7 +12,7 @@
 <body>
 <h1>Wykrywanie błędów CRC</h1>
 
-<% CrcResp resp= newCrcReponse;%>
+<% CrcResponse resp= newCrcReponse;%>
 <%
 String expected= resp.getExpected();
 String newData=resp.getNewData();

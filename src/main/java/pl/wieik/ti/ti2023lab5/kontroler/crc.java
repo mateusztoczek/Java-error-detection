@@ -7,10 +7,8 @@ import jakarta.servlet.annotation.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
-import pl.wieik.ti.ti2023lab5.model.CrcResp;
+import pl.wieik.ti.ti2023lab5.model.CrcResponse;
 
 @WebServlet(name="crc", value = "/crc")
 public class crc extends HttpServlet {
@@ -19,20 +17,18 @@ public class crc extends HttpServlet {
         super.init();
     }
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse res) throws IOException {
         res.sendRedirect("crc.jsp");
     }
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Odczytanie danych z żądania
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         HttpSession session = request.getSession();
         session.setAttribute("inputWord", request.getHeader("inputWord"));
-
         String inputWord,inputDiv,newData,crc;
-        String newDataType = "";
-        String newCRCType = "";
+        String newDataType;
+        String newCRCType;
 
-
+        //zczytaj linie z request.Body do Readera
         try {
             BufferedReader reader = request.getReader();
             StringBuilder requestBody = new StringBuilder();
@@ -41,10 +37,8 @@ public class crc extends HttpServlet {
                 requestBody.append(line);
             }
 
-            // Parse the JSON string into a JsonObject
+            //Zdobądź dane z JSON
             JsonObject jsonObject = JsonParser.parseString(requestBody.toString()).getAsJsonObject();
-
-            // Retrieve the variables from the JsonObject
             newData = jsonObject.get("newData").getAsString();
             inputWord = jsonObject.get("inputWord").getAsString();
             inputDiv = jsonObject.get("inputDiv").getAsString();
@@ -60,15 +54,13 @@ public class crc extends HttpServlet {
             return;
         }
 
-        CrcResp newResp = new CrcResp();
+        //przypisanie wartośći do składowych obiektu newResp
+        CrcResponse newResp = new CrcResponse();
         newResp.setNewData(newDataType);
         newResp.setDiv(inputDiv);
         newResp.setExpected(inputWord);
         newResp.setCrc(newCRCType);
-
         session.setAttribute("notatka", request.getHeader("notatka"));
-
-
         session.setAttribute("newCrcReponse",newResp);
 
         // Odczytanie raportu z nagłówka "Report"
@@ -77,7 +69,6 @@ public class crc extends HttpServlet {
 
         // Ustawienie typu zawartości odpowiedzi
         response.setContentType("application/json");
-
         response.sendRedirect("crcReceiver.jsp");
     }
 
